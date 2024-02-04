@@ -72,7 +72,7 @@ contract NFTMock is
     )
         public
         view
-        override(ERC721, ERC721Enumerable, AccessControl)
+        override(IERC165, ERC721, ERC721Enumerable, AccessControl)
         returns (bool)
     {
         return super.supportsInterface(interfaceId);
