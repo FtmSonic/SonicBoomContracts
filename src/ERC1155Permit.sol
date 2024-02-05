@@ -14,9 +14,13 @@ contract ERC1155Permit is ERC1155, IERC1155Permit, EIP712 {
 
     /// @dev Typehash of the permit function
     bytes32 private immutable _PERMIT_TYPEHASH =
-        keccak256("Permit(address owner,address operator,bool approved,uint256 nonce,uint256 deadline)");
+        keccak256(
+            "Permit(address owner,address operator,bool approved,uint256 nonce,uint256 deadline)"
+        );
 
-    constructor() ERC1155("") EIP712("PrimitiveManager", "1") {}
+    constructor(
+        string memory uri
+    ) ERC1155(uri) EIP712("PrimitiveManager", "1") {}
 
     /// @inheritdoc IERC1155Permit
     function permit(
@@ -32,7 +36,14 @@ contract ERC1155Permit is ERC1155, IERC1155Permit, EIP712 {
 
         unchecked {
             bytes32 structHash = keccak256(
-                abi.encode(_PERMIT_TYPEHASH, owner, operator, approved, nonces[owner]++, deadline)
+                abi.encode(
+                    _PERMIT_TYPEHASH,
+                    owner,
+                    operator,
+                    approved,
+                    nonces[owner]++,
+                    deadline
+                )
             );
 
             bytes32 hash = _hashTypedDataV4(structHash);
