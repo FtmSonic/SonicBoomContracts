@@ -1,5 +1,1 @@
-{
-  "devDependencies": {
-    "@soliditylabs/erc721-permit": "^1.0.0"
-  }
-}
+{}
